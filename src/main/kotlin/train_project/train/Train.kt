@@ -1,7 +1,7 @@
 package train_project.train
 
 
-class Train(
+data class Train(
     override var station: String,
     override var number: String,
     override var countOfWagons: Number,

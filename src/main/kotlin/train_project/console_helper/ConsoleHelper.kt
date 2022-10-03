@@ -31,6 +31,34 @@ object ConsoleHelper{
         }
         start()
     }
+    private fun edit(){
+        //По индексу вводить новую инфу
+        start()
+    }
+    private fun search(){
+        //Спросить по какому столбцу искать
+        //Проверить через контеинс
+        println("Поиск по какому столбцу?")
+        val columnSearchedBy = readLine()
+        if(columnSearchedBy == null){
+            println("Вы ввели пустую строку")
+            show()
+        }else{
+            val rowSearchedBy = readLine()
+            if (rowSearchedBy != null)
+            database.search({
+                when(columnSearchedBy){
+                    "Вокзал"->it.station.contains(rowSearchedBy)
+                    "Номер"->it.number.contains("")
+                    else->true
+                }
+            }).forEachIndexed {
+                    index,it ->
+                println("$index"+it.toString())
+            }
+            start()
+        }
+    }
     private fun show(){
         println("Сортировку по какому столбцу?")
         val columnSortedBy = readLine()
@@ -38,13 +66,16 @@ object ConsoleHelper{
             println("Вы ввели пустую строку")
             show()
         }else{
-            database.search({ it.station.isNotEmpty() }).sortedBy{
+            database.search({true}).sortedBy{
                 when(columnSortedBy){
                     "Вокзал"->it.station
                     "Номер"->it.number
                     else->it.station
                 }
-            }.forEach {println(it.toString())}
+            }.forEachIndexed {
+                    index,it ->
+                println("$index"+it.toString())
+            }
             start()
         }
     }
@@ -56,7 +87,9 @@ object ConsoleHelper{
         }else{
             when(command){
                 "Просмотр"->show()
+                "Поиск"->search()
                 "Добавление"->add()
+                "Редактирование"->edit()
                 "Удаление"->del()
             }
         }

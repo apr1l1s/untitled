@@ -18,7 +18,9 @@ object ConsoleHelper{
     }
     private fun add(){
         val stringOfTrain = readLine()?.trim()?.split(' ')
-        if (stringOfTrain.isNullOrEmpty()) println("Ошибка, пустая строка")
+        if (stringOfTrain.isNullOrEmpty() || stringOfTrain.size != 4) {
+            println("Ошибка, пустая строка")
+        }
         else{
             val addedTrain = Train(
                 station = stringOfTrain[0],
@@ -39,7 +41,7 @@ object ConsoleHelper{
             //Ввести новый элемент
             println("Введите новый элемент")
             val stringOfTrain = readLine()?.trim()?.split(' ')
-            if (stringOfTrain.isNullOrEmpty()) {
+            if (stringOfTrain.isNullOrEmpty() || stringOfTrain.size != 4 ) {
                 println("Ошибка, пустая строка")
                 edit()
             }
@@ -102,6 +104,9 @@ object ConsoleHelper{
             start()
         }
     }
+    private fun exit(){
+        println("Завершение работы...")
+    }
     fun start(){
         val command = readLine()
         if (command.isNullOrEmpty()){
@@ -114,6 +119,11 @@ object ConsoleHelper{
                 "Добавление"->add()
                 "Редактирование"->edit()
                 "Удаление"->del()
+                "Выход"->exit()
+                else->{
+                    println("Неизвестная команда")
+                    start()
+                }
             }
         }
     }

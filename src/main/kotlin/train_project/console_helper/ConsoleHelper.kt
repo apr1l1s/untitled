@@ -33,11 +33,34 @@ object ConsoleHelper{
     }
     private fun edit(){
         //По индексу вводить новую инфу
-        start()
+        println("Введите индекс заменяемого элемента")
+        val editedIndex = readLine()?.toInt()
+        if (editedIndex != null && editedIndex in database.data.indices){
+            //Ввести новый элемент
+            println("Введите новый элемент")
+            val stringOfTrain = readLine()?.trim()?.split(' ')
+            if (stringOfTrain.isNullOrEmpty()) {
+                println("Ошибка, пустая строка")
+                edit()
+            }
+            else {
+                val addedTrain = Train(
+                    station = stringOfTrain[0],
+                    number = stringOfTrain[1],
+                    countOfWagons = stringOfTrain[2].toInt(),
+                    types = TrainTypes.parseTrainTypes(stringOfTrain[3])
+                )
+                database.replace(editedIndex, addedTrain)
+                println("Успешно!")
+                start()
+            }
+        } else {
+            println("Вы ввели неверный индекс")
+            del()
+        }
     }
     private fun search(){
-        //Спросить по какому столбцу искать
-        //Проверить через контеинс
+        //Решить вопрос с индексацией
         println("Поиск по какому столбцу?")
         val columnSearchedBy = readLine()
         if(columnSearchedBy == null){

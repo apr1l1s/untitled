@@ -58,7 +58,7 @@ object ConsoleHelper{
             }
         } else {
             println("Вы ввели неверный индекс")
-            del()
+            edit()
         }
     }
     private fun search(){

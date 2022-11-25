@@ -10,5 +10,5 @@ fun main() {
             .filter{x%it==0}
             .toList().sum()==x
     }
-    println(sqn.indexOfFirst { it == 8128 }+1)
+    println(sqn.indexOfFirst { it == n }+1)
 }

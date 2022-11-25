@@ -3,7 +3,9 @@
 //способами:
 //1. как обычную функцию;
 //2. как tailrec-функцию.
-fun myFunction(n: Int):Int{
+
+//надо было добавить разные вариации ответов в 2 функцию
+fun myFunction(n: Int):Int?{
     var num = n
     var buff:Int
     var minimum = 10
@@ -14,18 +16,17 @@ fun myFunction(n: Int):Int{
         }
         num/= 10
     }
-    if (minimum != 10) println(minimum)
-    else println("В данном числе нет цифры кратной тройке")
-    return minimum
+    return if (minimum != 10) minimum
+    else null
 }
-tailrec fun myTailFunction(n:Int, answer:Int = 10):Int =
-    if (n==0) answer
+tailrec fun myTailFunction(n:Int, answer:Int = 10):Int? =
+    if (n==0) if (answer!=10) answer else null
     else if (n%10 %3 == 0 && n%10 < answer) myTailFunction(n=n/10,answer=n%10)
-    else myTailFunction(n/10, answer)
+         else myTailFunction(n/10, answer)
 
 
 fun main(){
-    var num = readLine()?.toIntOrNull()
+    val num = readLine()?.toIntOrNull()
     if (num !=null) {
         println(myFunction(num))
         println(myTailFunction(num))

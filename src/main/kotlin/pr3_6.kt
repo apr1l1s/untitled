@@ -3,5 +3,12 @@
 //пользуйте факты, которые вы не можете доказать самостоятельно)
 
 fun main() {
-    val sqn = generateSequence {  }
+    val n = 8128
+    val sqn = generateSequence(1){it+1}.filter{x->
+        generateSequence(1){it+1}
+            .take(x-1)
+            .filter{x%it==0}
+            .toList().sum()==x
+    }
+    println(sqn.indexOfFirst { it == 8128 }+1)
 }

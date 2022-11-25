@@ -11,22 +11,21 @@ fun main(){
     }else{
         var count=0
         var minimum = str.length
-        var answer=' '
-        for(i in str.indices){
-            if (str[i]!=' '){
+        var answer = ' '
+        for (i in str.indices) {
+            if (str[i] !=' '){
                 count++
             }else{
-                if (count!=0)
-                    if (count < minimum && count%2==0) {
-                        answer = str[i-count]
-                        minimum=count
-                    }
-                count=0
+                if (minimum>count && count%2==0) {
+                    answer = str[i-count]
+                    minimum = count
+                    count = 0
+                }
             }
-
         }
-        if (count<minimum && count%2==0){
-            answer = str[str.length-count]
+        if (minimum>count && count%2==0) {
+            println(count)
+            answer = str[str.length - count]
         }
         println(answer)
     }
